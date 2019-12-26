@@ -1,15 +1,20 @@
 # Container Control
 
-CONTAINER=analyzer
-PORT=2200
+CONTAINER=iandennismiller/gthnk
 
-include ../config.mak
-include ../bin/container.mak
+all: build run
+	@echo ok
 
-download:
-	docker container cp analyzer:/home/analyzer/.rstudio-desktop/monitored/user-settings/user-settings \
-		files/rstudio-user-settings.ini
-	docker container cp analyzer:/home/analyzer/.config/RStudio/desktop.ini \
-		files/rstudio-desktop.ini
+run:
+	docker run -it $(CONTAINER)
 
-.PHONY: all run destroy shell build push ssh-init ssh tunnel vnc cp download
+daemonize:
+	docker run -d $(CONTAINER)
+
+build:
+	docker build -t $(CONTAINER):latest .
+
+push:
+	docker push $(CONTAINER)
+
+.PHONY: all run daemonize build push
