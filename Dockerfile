@@ -14,7 +14,7 @@ RUN adduser \
   --gecos "$USERGECOS" \
   --disabled-password \
   "$USERNAME"
-COPY files/ /home/$USERNAME
+COPY files/home/ /home/$USERNAME
 RUN chown -R $USERNAME:$USERNAME /home/$USERNAME
 
 # Set up the virtual environment
