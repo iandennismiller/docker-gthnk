@@ -32,10 +32,10 @@ RUN chown gthnk:gthnk /var/lib/gthnk
 RUN sudo -i -u gthnk git clone https://github.com/iandennismiller/gthnk.git
 
 # Initialize the database
-RUN sudo -i -u gthnk sh -c 'cd ~/gthnk && SETTINGS=/home/gthnk/.gthnk/gthnk.conf /home/gthnk/.venv/bin/manage.py init_db'
+# RUN sudo -i -u gthnk sh -c 'cd ~/gthnk && SETTINGS=/home/gthnk/.gthnk/gthnk.conf /home/gthnk/.venv/bin/manage.py init_db'
 
 # Create a user with EMAIL and PASSWORD
 # RUN sudo -i -u gthnk SETTINGS=/home/gthnk/.gthnk/gthnk.conf /home/gthnk/.venv/bin/manage.py user_add -e EMAIL -p PASSWORD
 
 # Launch the gthnk server
-# RUN sudo -i -u gthnk SETTINGS=/home/gthnk/.gthnk/gthnk.conf /home/gthnk/.venv/bin/runserver.py
+CMD sudo -i -u gthnk SETTINGS=/home/gthnk/.gthnk/gthnk.conf /home/gthnk/.venv/bin/runserver.py

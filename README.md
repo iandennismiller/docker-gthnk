@@ -1,10 +1,19 @@
 # docker-gthnk
 
-Docker container for gthnk
+## Quick start with Docker
 
-- make build
-- make daemonize
-- make run
-- make shell
+```
+docker run -d \
+    -p 1620:1620 \
+    -v ~/.gthnk:/home/gthnk/.gthnk \
+    iandennismiller/gthnk
+```
 
-`sudo -i -u user SETTINGS=/home/user/.gthnk/gthnk.conf /home/user/.venv/bin/runserver.py`
+## Normal usage
+
+Edit the `Makefile` to choose a username and password.
+
+```
+git clone https://github.com/iandennismiller/docker-gthnk
+make run db user
+```
