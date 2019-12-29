@@ -9,7 +9,7 @@ The following commands will do the following:
 3. Add a new user to Gthnk
 
 ```
-docker run -d \
+docker run -d --rm \
     --name gthnk \
     -p 1620:1620 \
     -v ~/.gthnk:/home/gthnk/.gthnk \
