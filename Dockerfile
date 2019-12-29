@@ -19,11 +19,12 @@ RUN adduser \
 COPY files/home/ /home/$USERNAME/
 RUN chown -R $USERNAME:$USERNAME /home/$USERNAME
 
+# Set up the virtual environment
+# RUN apt install -y libzstd-dev
+RUN sudo -i -u gthnk virtualenv -p /usr/bin/python2 /home/gthnk/venv
+
 # Clone the git repo
 RUN sudo -i -u gthnk git clone https://github.com/iandennismiller/gthnk.git
-
-# Set up the virtual environment
-RUN sudo -i -u gthnk virtualenv /home/gthnk/venv
 
 # Install Gthnk
 RUN sudo -i -u gthnk /home/gthnk/venv/bin/pip install git+https://github.com/iandennismiller/gthnk.git@master
