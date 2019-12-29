@@ -3,6 +3,7 @@
 CONTAINER=iandennismiller/gthnk
 EMAIL=user@example.com
 PASSWORD=secret
+CONTAINER_EXEC=docker exec -it gthnk sudo -i -u gthnk
 
 all: build run
 	@echo ok
@@ -31,11 +32,17 @@ build:
 push:
 	docker push $(CONTAINER)
 
-db:
-	docker exec -it gthnk sudo -i -u gthnk sh -c 'cd ~/gthnk && SETTINGS=/home/gthnk/.gthnk/gthnk.conf /home/gthnk/.venv/bin/manage.py init_db'
+config:
+	$(CONTAINER_EXEC) gthnk-config-init.sh /home/gthnk/.gthnk/gthnk.conf
 
-user:
-	docker exec -it gthnk sudo -i -u gthnk sh -c 'cd ~/gthnk && SETTINGS=/home/gthnk/.gthnk/gthnk.conf /home/gthnk/.venv/bin/manage.py user_add -e $(EMAIL) -p $(PASSWORD)'
+db:
+	$(CONTAINER_EXEC) gthnk-db-init.sh
+
+user-add:
+	$(CONTAINER_EXEC) gthnk-user-add.sh $(EMAIL) $(PASSWORD)
+
+user-del:
+	$(CONTAINER_EXEC) gthnk-user-del.sh $(EMAIL)
 
 shell:
 	docker exec -it gthnk bash

@@ -1,3 +1,12 @@
+#!/bin/bash
+
+if [[ -z $1 ]]; then
+    echo "error: configuration filename is required."
+    echo "usage: gthnk-config-init.sh FILENAME"
+    exit
+fi
+
+cat <<EOF > "$1"
 PROJECT_NAME = "gthnk"
 IP = "0.0.0.0"
 PORT = 1620
@@ -33,3 +42,4 @@ BACKUP_PATH = "/home/gthnk/.gthnk/backup"
 INPUT_FILES = "/home/gthnk/.gthnk/journal.txt"
 PROJECT_PATH = "/home/gthnk/.gthnk/Work"
 EXPORT_PATH = "/home/gthnk/.gthnk/export"
+EOF
