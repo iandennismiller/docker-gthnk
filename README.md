@@ -12,7 +12,7 @@ The following commands will do the following:
 docker run -d --rm \
     --name gthnk \
     -p 1620:1620 \
-    -v ~/.gthnk:/home/gthnk/.gthnk \
+    -v ~/.gthnk:/home/gthnk/storage \
     iandennismiller/gthnk
 ```
 
