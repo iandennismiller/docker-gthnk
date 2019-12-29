@@ -16,7 +16,7 @@ docker run -d --rm \
     iandennismiller/gthnk
 ```
 
-Once Gthnk is running, connect at http://localhost:1620
+Once Gthnk is running, connect at http://localhost:1620 and log in with the username `user@example.com` and the password `secret`.
 
 This will create a folder in your home directory called `.gthnk` that contains a configuration file, database, and log file.
 You can use `~/.gthnk/gthnk.conf` file to control how Gthnk operates.
