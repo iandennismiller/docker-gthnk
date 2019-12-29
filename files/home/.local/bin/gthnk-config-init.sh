@@ -11,9 +11,9 @@ PROJECT_NAME = "gthnk"
 IP = "0.0.0.0"
 PORT = 1620
 DEBUG = False
-LOG = "/home/gthnk/.gthnk/gthnk.log"
+LOG = "/home/gthnk/storage/gthnk.log"
 LOG_LEVEL = "DEBUG"
-SQLALCHEMY_DATABASE_URI = "sqlite:////home/gthnk/.gthnk/gthnk.db"
+SQLALCHEMY_DATABASE_URI = "sqlite:////home/gthnk/storage/gthnk.db"
 SECRET_KEY = '\x19h\x83\x11\xef\xdeL\x92\xc2\xa4\xd5T&\xd0\xf1\x87\x91\x9bQ7\xe6\x18A\xea'
 
 BASE_URL = "http://local.gthnk.com"
@@ -35,11 +35,11 @@ MAIL_USE_TLS = False
 MAIL_USERNAME = None
 MAIL_PASSWORD = None
 
-CELERY_BROKER_URL = 'sqla+sqlite:///home/gthnk/.gthnk/celery-db.sqlite'
-CELERY_RESULT_BACKEND = 'db+sqlite:///home/gthnk/.gthnk/celery-results.sqlite'
+CELERY_BROKER_URL = 'sqla+sqlite:///home/gthnk/storage/celery-db.sqlite'
+CELERY_RESULT_BACKEND = 'db+sqlite:///home/gthnk/storage/celery-results.sqlite'
 
-BACKUP_PATH = "/home/gthnk/.gthnk/backup"
-INPUT_FILES = "/home/gthnk/.gthnk/journal.txt"
-PROJECT_PATH = "/home/gthnk/.gthnk/Work"
-EXPORT_PATH = "/home/gthnk/.gthnk/export"
+BACKUP_PATH = "/home/gthnk/storage/backup"
+INPUT_FILES = "/home/gthnk/storage/journal.txt"
+PROJECT_PATH = "/home/gthnk/storage/Work"
+EXPORT_PATH = "/home/gthnk/storage/export"
 EOF

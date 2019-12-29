@@ -14,7 +14,7 @@ run:
 		--rm \
 		--name gthnk \
 		-p 1620:1620 \
-		-v ~/.gthnk:/home/gthnk/.gthnk \
+		-v ~/.gthnk:/home/gthnk/storage \
 		$(CONTAINER)
 
 daemonize:
@@ -23,7 +23,7 @@ daemonize:
 		--rm \
 		--name gthnk \
 		-p 1620:1620 \
-		-v ~/.gthnk:/home/gthnk/.gthnk \
+		-v ~/.gthnk:/home/gthnk/storage \
 		$(CONTAINER)
 
 build:
@@ -33,7 +33,7 @@ push:
 	docker push $(CONTAINER)
 
 config:
-	$(CONTAINER_EXEC) gthnk-config-init.sh /home/gthnk/.gthnk/gthnk.conf
+	$(CONTAINER_EXEC) gthnk-config-init.sh /home/gthnk/storage/gthnk.conf
 
 db:
 	$(CONTAINER_EXEC) gthnk-db-init.sh

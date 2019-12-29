@@ -14,6 +14,8 @@ RUN adduser \
   --gecos "$USERGECOS" \
   --disabled-password \
   "$USERNAME"
+
+# Copy home directory structure
 COPY files/home/ /home/$USERNAME/
 RUN chown -R $USERNAME:$USERNAME /home/$USERNAME
 
@@ -30,18 +32,16 @@ RUN sudo -i -u gthnk /home/gthnk/venv/bin/pip install git+https://github.com/ian
 RUN mkdir /var/lib/gthnk
 RUN chown gthnk:gthnk /var/lib/gthnk
 
-# Initialize the configuration
-RUN sudo -i -u gthnk gthnk-config-init.sh /home/gthnk/.gthnk/gthnk.conf
+# Initialize storage path
+RUN mkdir /home/gthnk/storage
+RUN chown gthnk:gthnk /home/gthnk/storage
 
-# Initialize the database
-RUN sudo -i -u gthnk gthnk-db-init.sh
-
-# Create a user with EMAIL and PASSWORD
-RUN sudo -i -u gthnk gthnk-user-add.sh user@example.com secret
+# Initialize the image
+RUN sudo -i -u gthnk gthnk-firstrun.sh /home/gthnk/storage/gthnk.conf
 
 # 1) Generate configuration if necessary
 # 2) Launch the Gthnk server
-CMD if [ ! -f /home/gthnk/.gthnk/gthnk.conf ]; then \
-  sudo -i -u gthnk gthnk-config-init.sh /home/gthnk/.gthnk/gthnk.conf; \
+CMD if [ ! -f /home/gthnk/storage/gthnk.conf ]; then \
+  sudo -i -u gthnk gthnk-firstrun.sh /home/gthnk/storage/gthnk.conf; \
   fi; \
   sudo -i -u gthnk gthnk-server.sh
