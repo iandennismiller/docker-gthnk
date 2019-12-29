@@ -44,6 +44,9 @@ user-add:
 user-del:
 	$(CONTAINER_EXEC) gthnk-user-del.sh $(EMAIL)
 
+rotate:
+	$(CONTAINER_EXEC) gthnk-rotate.sh
+
 shell:
 	docker exec -it gthnk bash
 
