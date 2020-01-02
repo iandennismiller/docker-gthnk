@@ -10,9 +10,8 @@ cat <<EOF > "$1"
 PROJECT_NAME = "gthnk"
 IP = "0.0.0.0"
 PORT = 1620
-DEBUG = False
 LOG = "/home/gthnk/storage/gthnk.log"
-LOG_LEVEL = "DEBUG"
+LOG_LEVEL = "WARN"
 SQLALCHEMY_DATABASE_URI = "sqlite:////home/gthnk/storage/gthnk.db"
 SECRET_KEY = '\x19h\x83\x11\xef\xdeL\x92\xc2\xa4\xd5T&\xd0\xf1\x87\x91\x9bQ7\xe6\x18A\xea'
 
@@ -25,8 +24,8 @@ SECURITY_URL_PREFIX = '/user'
 SECURITY_CHANGEABLE = True
 SECURITY_SEND_PASSWORD_CHANGE_EMAIL = False
 
-DEBUG = True
-DEBUG_TOOLBAR = False # True
+DEBUG = False
+DEBUG_TOOLBAR = False
 DEBUG_TB_INTERCEPT_REDIRECTS = False
 
 MAIL_SERVER = 'localhost'

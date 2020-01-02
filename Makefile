@@ -3,16 +3,19 @@
 CONTAINER=iandennismiller/gthnk
 EMAIL=user@example.com
 PASSWORD=secret
-CONTAINER_EXEC=docker exec -it gthnk sudo -i -u gthnk
+CONTAINER_EXEC=docker exec -it gthnk-server sudo -i -u gthnk
 
 all: build run
 	@echo ok
+
+compose:
+	docker-compose up -d
 
 run:
 	docker run \
 		-it \
 		--rm \
-		--name gthnk \
+		--name gthnk-server \
 		-p 1620:1620 \
 		-v ~/.gthnk:/home/gthnk/storage \
 		$(CONTAINER)
@@ -21,7 +24,7 @@ daemonize:
 	docker run \
 		-d \
 		--rm \
-		--name gthnk \
+		--name gthnk-server \
 		-p 1620:1620 \
 		-v ~/.gthnk:/home/gthnk/storage \
 		$(CONTAINER)
@@ -48,6 +51,6 @@ rotate:
 	$(CONTAINER_EXEC) gthnk-rotate.sh
 
 shell:
-	docker exec -it gthnk bash
+	docker exec -it gthnk-server bash
 
 .PHONY: all run daemonize build push
