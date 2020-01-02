@@ -1,43 +1,36 @@
+# docker-gthnk
+# Ian Dennis Miller
+
 FROM iandennismiller/python:latest
 
-###
-# Add a basic user
-
-ARG USERNAME=gthnk
-ARG USERHOME=/home/gthnk
-ARG USERID=1000
-ARG USERGECOS=gthnk
-
+# Add application user
 RUN adduser \
-  --home "$USERHOME" \
-  --uid $USERID \
-  --gecos "$USERGECOS" \
+  --home "/home/gthnk" \
+  --uid 1000 \
+  --gecos "gthnk" \
   --disabled-password \
-  "$USERNAME"
+  "gthnk"
 
 # Copy home directory structure
-COPY files/home/ /home/$USERNAME/
-RUN chown -R $USERNAME:$USERNAME /home/$USERNAME
+COPY files/home/ /home/gthnk/
+RUN chown -R gthnk:gthnk /home/gthnk
+
+# Initialize storage path
+RUN mkdir /home/gthnk/storage && chown gthnk:gthnk /home/gthnk/storage
+
+# Legacy; supports logging, somehow...
+RUN mkdir /var/lib/gthnk && chown gthnk:gthnk /var/lib/gthnk
 
 # Set up the virtual environment
-# RUN apt install -y libzstd-dev
-RUN sudo -i -u gthnk virtualenv -p /usr/bin/python2 /home/gthnk/venv
+RUN sudo -i -u gthnk virtualenv -p /usr/bin/python3.7 /home/gthnk/venv
 
 # Clone the git repo
 RUN sudo -i -u gthnk git clone https://github.com/iandennismiller/gthnk.git
 
 # Install Gthnk
-RUN sudo -i -u gthnk /home/gthnk/venv/bin/pip install git+https://github.com/iandennismiller/gthnk.git@master
+RUN sudo -i -u gthnk /home/gthnk/venv/bin/pip install /home/gthnk/gthnk
 
-# Legacy; supports logging, somehow...
-RUN mkdir /var/lib/gthnk
-RUN chown gthnk:gthnk /var/lib/gthnk
-
-# Initialize storage path
-RUN mkdir /home/gthnk/storage
-RUN chown gthnk:gthnk /home/gthnk/storage
-
-# Initialize the image
+# Initialize the container with a configuration and database
 RUN sudo -i -u gthnk gthnk-firstrun.sh /home/gthnk/storage/gthnk.conf
 
 # 1) Generate configuration if necessary
