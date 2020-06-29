@@ -13,4 +13,5 @@ fi
 mkdir -p /home/gthnk/storage/export/attachment \
     /home/gthnk/storage/export/markdown \
     /home/gthnk/storage/export/text \
-    /home/gthnk/storage/export/thumbnail
+    /home/gthnk/storage/export/thumbnail \
+    /home/gthnk/storage/export/preview
